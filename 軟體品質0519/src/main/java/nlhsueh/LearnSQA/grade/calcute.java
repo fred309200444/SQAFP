@@ -4,16 +4,18 @@ import java.util.Scanner;
 import static org.mockito.Mockito.*;
 public class calcute{
 	
-	dataDB datas;
-	ListDB db;
+	dataDB db;
+	//ListDB db;
+	//ListCollector listCollector;
 	
 
-		public calcute(ListDB db) {
+		public calcute(dataDB db) {
 			this.db = db;
 		}
 
 		public void go() {
 			// the process of the program
+			int count=0;
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Input class id: ");
 			int classID = sc.nextInt();
@@ -22,8 +24,12 @@ public class calcute{
 			for(int i=0;i<120;i++)
 			{
 				Dzthree[i] = new dataDB();
+				if(Dzthree[i].getmoney())
+				{
+					count++;
+				}
 			}
-			double x=100.0;//繳系費率
+			double x=(count/120)*100;//繳系費率
 			
 
 			System.out.println("Grade book of class " + classID);
@@ -31,27 +37,7 @@ public class calcute{
 			System.out.println("繳系費率 " + classID + x + "%");
 		}
 }
-	
-	interface data
-	{
-		void data(String sclass , String sid, String sname, boolean money, boolean cloth);
-		void data();
-	}
-		
-	class ListDB
-	{
-		dataDB[] db;
-		//this.db = dataDB.data();
-		public dataDB[] getDB()
-		{
-			return db;
-		}
-		public void setDB(dataDB datas) {
-			db[0] = datas;
-		}
-	}
-	
-	class dataDB implements data{
+	class dataDB{
 		String sclass;
 		String sid;
 		String sname;
@@ -73,7 +59,36 @@ public class calcute{
 			this.money = true;
 			this.cloth = true;
 		}
+		public boolean getmoney()
+		{
+			return money;
+		}
+		/*public dataDB getGrade(int classID) {
+			return null;
+		}*/
 	}
+	
+	/*interface ListCollector {
+		int getlistcount(int classID);
+
+		void setDB(dataDB db);
+	}*/
+	
+	/*class LCollector implements ListCollector {
+		dataDB db;
+
+		public int getlistcount(int classID) {
+			int count=0;
+			dataDB g = db.getGrade(classID);
+			assert (g != null);
+			return count;
+			
+		}
+
+		public void setDB(dataDB db) {
+			this.db = db;
+		}
+	}*/
 	
 
 
